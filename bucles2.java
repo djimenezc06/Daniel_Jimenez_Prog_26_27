@@ -301,7 +301,7 @@ public class bucles2 {
         System.out.println("Introduce el número de tu dni para calcular tu letra (Ej: 03454345)");
         int num = sc.nextInt();
 
-        double resto = num % 23;
+        int resto = num % 23;
 
         switch (resto) {
             case 0:
@@ -377,10 +377,116 @@ public class bucles2 {
                 letra = '?';
                 break;
         }
-        System.out.println("El DNI completo es: " + dni + "-" + letra);
-
+        System.out.println("El DNI completo es: " + num + "-" + letra);
     }
 
+    /*Ejercicio 10: Solicita al usuario una cadena y comprueba el número de vocales que tiene.
+    Deberás usar el método charAT(i) de la clase String para extraer un carácter de la cadena, donde i es
+    la posición del carácter de la cadena que queremos obtener. Por ejemplo, si quisiéramos obtener el
+    carácter número de 5 de una cadena lo haríamos así: cadena.charAT(i) */
+    public static void ejercicio10(){
+        System.out.println("Introduce una palabra");
+        String cadena = sc.nextLine();
+        int contador = 0;
+
+        for(int i = 0; i < cadena.length(); i++){
+            if(cadena.charAt(i) == 'a' || cadena.charAt(i) == 'e' ||
+                cadena.charAt(i) == 'i' || cadena.charAt(i) == 'o' || cadena.charAt(i) == 'u'){
+                    contador++;
+                }
+        }
+        System.out.println("Número de vocales de la cadena introducida: " + contador);
+    }
+
+    /*Ejercicio 11: Realiza el control de acceso a una caja fuerte. La combinación será un número de cuatro
+    cifras. El usuario tendrá 4 oportunidades para averiguar el número.
+    El programa nos pedirá la combinación para abrirla. Si no acertamos, se nos mostrará el mensaje
+    “Clave incorrecta le quedan X intentos”, si agota los 4 intentos mostrará el mensaje “Lo siento has
+    agotado las 4 oportunidades” y si acertamos se nos dirá “Has abierto la caja fuerte”. */
+    public static void ejercicio11(){
+        int combinacion = 1711;
+        int intentos = 4;
+        boolean abierta = false;
+        while(intentos > 0 && !abierta){
+            System.out.println("Introduce la combinación de 4 cifras, tiene 4 intentos");
+            int clave = sc.nextInt();
+
+            if(clave == combinacion){
+                System.out.println("Has abierto la caja fuerte");
+                abierta = true;
+            } else {
+                intentos--;
+                if(intentos > 0){
+                    System.out.println("Clave incorrecta, tiene " + intentos + " restantes");
+                } else {
+                    System.out.println("No quedan más oportunidades");
+                }
+            }
+        }
+    }
+
+    /*Ejercicio 12: Realiza un programa que compruebe si dos números son amigos. Para ello hay que
+    comprobar que la suma de todos los divisores del primer número (sin contar con él) es el segundo
+    número, y que la suma de todos los divisores propios del segundo número (sin contar con él) es el
+    primer número. Por ejemplo:
+    - Los divisores propios de 220 son 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 y 110. Su suma es 284.
+    - Los divisores propios de 284 son 1, 2, 4, 71 y 142. Su suma es 220.
+    - Por tanto, 220 y 284 son amigos. */
+    public static void ejercicio12(){
+        System.out.println("Introduce el primer número");
+        int n1 = sc.nextInt();
+        System.out.println("Introduce el segundo número");
+        int n2 = sc.nextInt();
+
+        int sumaDivisores1 = 0;
+        int sumaDivisores2 = 0;
+
+        for(int i = 1; i <= n1 / 2; i++){
+            if(n1 % i == 0){
+                sumaDivisores1 += i;
+            }
+        }
+        for(int i = 1; i <= n2 / 2; i++){
+            if(n2 % i == 0){
+                sumaDivisores2 += i;
+            }
+        }
+        if(sumaDivisores1 == n2 && sumaDivisores2 == n1){
+            System.out.println("Los números " + n1 + " y " + n2 + " son números amigos");
+        } else {
+            System.out.println("Los números " + n1 + " y " + n2 + " no son números amigos");
+
+        }
+    }
+
+    /*Ejercicio 13: Realiza un algoritmo que permita calcular un número determinado de elementos de la
+    serie de Fibonacci, teniendo en cuenta que cada uno es la suma de los dos elementos anteriores, con la excepción de los dos primeros,
+    que son 0 y 1. Así, la serie estaría formada por los números: 0, 1, 1,
+    2, 3, 5, 8, 13, 21… */
+    public static void ejercicio13(){
+        System.out.println("Introduce el número de elementos de la serie Fibonacci que quieres calcular");
+        int n = sc.nextInt();
+        if(n <= 0){
+            System.out.println("A poder ser mayor que 0");
+        } else {
+            long f1 = 0;
+            long f2 = 1;
+
+            System.out.println("Los " + n + " primeros elementos de la serie de Fibonacci son: ");
+
+            for(int i = 1; i <= n; i++){
+                System.out.print(f1);
+
+                if(i < n){
+                    System.out.print(", ");
+                }
+                long siguiente = f1 + f2;
+                f1 = f2;
+                f2 = siguiente;
+            }
+            System.out.println();
+        }
+    }
     public static void main(String[] args) {
         // ejercicio1();
         // ejercicio2();
@@ -390,5 +496,10 @@ public class bucles2 {
         // ejercicio6();
         // ejercicio7();
         // ejercicio8();
+        //ejercicio9();
+        //ejercicio10();
+        //ejercicio11();
+        //ejercicio12();
+        //ejercicio13();
     }
 }
